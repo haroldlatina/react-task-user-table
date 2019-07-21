@@ -1,0 +1,71 @@
+ .App{
+   max-height: 1024px;
+   height: 1024px;
+   width:100%;
+   background:rgb(24,27,33);
+   margin: 0;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+  
+ }
+
+.container{
+  margin-top:50px;
+  width: 90%;
+  height:95%;  
+  min-height:600px;
+  border: 2px solid rgb(28,56,65);
+  -webkit-box-shadow: 3px 8px 36px 1px rgba(8,112,112,0.5);
+  -moz-box-shadow: 3px 8px 36px 1px rgba(8,112,112,0.5);
+  box-shadow: 3px 8px 36px 1px rgba(8,112,112,0.5);
+  background-color: #101f24;
+}
+
+.container .table{
+    font-size:2vh;
+    color:#D6D8D8;
+    width:100%;
+    margin-top:80px;
+    border:none;
+}
+
+.app-header{
+  margin: 20px 0px 0px 60px;
+  font-size: 6vh;
+  color: #29ae83;
+  font-weight: 200;
+}
+
+.app-header span:nth-child(1){
+  color:white;
+} 
+
+.app-text-field{
+  margin: 20px 0px 0px 50px;
+  width:30%;
+}
+
+.app-text-field input.form-control, .app-text-field input.form-control:visited {
+  background-color:rgba(30, 52, 67, 0.6);
+  border:none;  
+  border-radius: 80px;
+  font-size:30px; 
+  height:50px;
+  color: #D6D8D8;
+}
+
+.app-text-field input.form-control::placeholder{
+color:#4A6268;
+font-weight: 200;
+font-size:16px;
+padding-left:20px;
+
+}
+
+
+.container .container-title{
+  margin: 20px 0px 0px 20px;  
+  color:white;
+  font-size: 3vh;
+  font-weight: bold;
+}
