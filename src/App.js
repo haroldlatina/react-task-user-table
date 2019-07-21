@@ -8,6 +8,8 @@ import { Col, Row } from 'react-bootstrap';
 import { Chart } from 'chart.js'
 import './App.css';
 
+const data = require('./data/users.json');
+
 const chartAxesOptions = {
   fontColor: "white",
   fontSize: 14,
@@ -24,14 +26,6 @@ const chartLabelOptions = {
 const colorArray = [
   'rgba(255, 99, 132, 0.6)',
   'rgba(54, 162, 235, 0.6)'
-]
-
-const userList = [
-  { "id": 1, "name": "User 1", "gender": "male", "age": 22 },
-  { "id": 2, "name": "User 2", "gender": "male", "age": 25 },
-  { "id": 3, "name": "User 3", "gender": "female", "age": 32 },
-  { "id": 4, "name": "User 4", "gender": "female", "age": 52 },
-  { "id": 5, "name": "User 5", "gender": "male", "age": 62 }
 ]
 
 const tableHeader = ["Name", "Gender", "Age"]
@@ -53,10 +47,12 @@ class App extends Component {
     this.getAllData();
   }
 
+
+
   getAllData = () => {
     this.setState({
-      userListToShow: userList,
-      userList: userList
+      userListToShow: data,
+      userList: data
     }, function () {
       this.filterData();
     })
