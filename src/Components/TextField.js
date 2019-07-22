@@ -6,7 +6,7 @@ const TextField = props => {
     return <FormControl
         name="text"
         type="search"
-        placeholder="Search by name"
+        placeholder="Search by Name"
         onChange={props.onChange}
     />
 }
