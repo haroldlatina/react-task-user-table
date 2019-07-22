@@ -3,13 +3,15 @@ import { Table } from 'react-bootstrap';
 import UserDetails from './UserDetails';
 import PropTypes from 'prop-types';
 
+const tableHeader = ["Name", "Gender", "Age"];
+
 const UsersTable = props => {
     return (
         <Table>
             <thead>
                 <tr>
                     {
-                        props.tableHeader.map((header, index) => {
+                        tableHeader.map((header, index) => {
                             return (
                                 <th key={index}>{header}</th>
                             )
@@ -37,7 +39,6 @@ const UsersTable = props => {
 }
 
 UsersTable.propTypes = {
-    tableHeader: PropTypes.string.isRequired,
     userList: PropTypes.array.isRequired
 };
 

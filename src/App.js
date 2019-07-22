@@ -5,40 +5,16 @@ import Header from './Components/Header';
 import UsersChart from './Components/UsersChart';
 import Container from './Components/Container';
 import { Col, Row } from 'react-bootstrap';
-import { Chart } from 'chart.js'
 import './App.css';
 
-const data = require('./data/users.json');
-
-const chartAxesOptions = {
-  fontColor: "white",
-  fontSize: 14,
-  beginAtZero: true,
-  stepSize: 1,
-}
-
-const chartLabelOptions = {
-  display: true,
-  fontColor: "white",
-  fontSize: 14
-}
-
-const colorArray = [
-  'rgba(255, 99, 132, 0.6)',
-  'rgba(54, 162, 235, 0.6)'
-]
-
-const tableHeader = ["Name", "Gender", "Age"]
+const jsonData = require('./data/users.json');
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userList: [],
-      tableHeader: [],
-      userListToShow: [],
-      maleCount: null,
-      femaleCount: null,
+      filteredUserList: [],
       searchValue: "",
     }
   }
@@ -47,12 +23,10 @@ class App extends Component {
     this.getAllData();
   }
 
-
-
   getAllData = () => {
     this.setState({
-      userListToShow: data,
-      userList: data
+      userList: jsonData,
+      filteredUserList: jsonData
     }, function () {
       this.filterData();
     })
@@ -66,81 +40,9 @@ class App extends Component {
   }
 
   filterData = () => {
-    let userList = [...this.state.userList]
-      , tempUserList = []
-      , maleCount = 0
-      , femaleCount = 0;
-
-    for (let i = 0; i < userList.length; i++) {
-      if (userList[i].name.toLowerCase().includes(this.state.searchValue)) {
-        tempUserList.push(userList[i])
-        if (userList[i].gender === "male") { maleCount++ }
-        else if (userList[i].gender === "female") { femaleCount++ }
-      }
-    }
-
     this.setState({
-      userListToShow: tempUserList,
-      maleCount: maleCount,
-      femaleCount: femaleCount
-    }, function () {
-      this.generateChart();
+      filteredUserList: [...this.state.userList.filter(user => user.name.toLowerCase().includes(this.state.searchValue))]
     })
-  }
-
-  generateChart = () => {
-    let { maleCount, femaleCount } = this.state;
-
-    if (window.chartInstance != null) {
-      window.chartInstance.destroy();
-    };
-
-    var chart = document.getElementById('asc-rightCanvas').getContext('2d');
-
-    window.chartInstance = new Chart(chart, {
-      type: 'bar',
-      data: {
-        labels: ['Male', 'Female'],
-        datasets: [{
-          label: 'Number of Users',
-          data: [maleCount, femaleCount],
-          backgroundColor: [...colorArray],
-          borderColor: [...colorArray],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        legend: {
-          labels: {
-            fontColor: "white",
-            fontSize: 15
-          }
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              ...chartAxesOptions
-              , min: 0
-              , max: 10
-            },
-            scaleLabel: {
-              ...chartLabelOptions
-              , labelString: 'Number of Users',
-
-            }
-          }],
-          xAxes: [{
-            ticks: {
-              ...chartAxesOptions
-            },
-            scaleLabel: {
-              ...chartLabelOptions
-              , labelString: 'Gender'
-            }
-          }]
-        }
-      }
-    });
   }
 
   render() {
@@ -159,14 +61,13 @@ class App extends Component {
             <Col md={6}>
               <Container title="List of Users">
                 <UsersTable
-                  userList={this.state.userListToShow}
-                  tableHeader={tableHeader}
+                  userList={this.state.filteredUserList}
                 />
               </Container>
             </Col>
             <Col md={6}>
               <Container title="Users By Gender">
-                <UsersChart userList={this.state.userListToShow} />
+                <UsersChart userList={this.state.filteredUserList} />
               </Container>
             </Col>
           </Row>
