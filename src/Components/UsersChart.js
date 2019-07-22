@@ -31,7 +31,6 @@ class UsersChart extends Component {
     }
 
     componentWillUnmount() {
-        alert("asd")
         if (window.chartInstance != null) {
             window.chartInstance.destroy();
         }
